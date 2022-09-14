@@ -1,9 +1,9 @@
 import express from 'express'
-import defaultRoute from './routes'
+import FarmerRoute from './routes/FarmerRoute'
 
 const app = express()
 
 app.use(express.json())
-app.use('/', defaultRoute)
+app.use('/farmer', FarmerRoute)
 
 export { app }
