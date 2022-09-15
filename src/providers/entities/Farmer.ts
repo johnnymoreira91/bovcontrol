@@ -4,7 +4,8 @@ import { mongoose } from '../implementations/MongoProvider'
 const schema = new mongoose.Schema<Farmer>({
   name: { type: String, required: true },
   email: { type: String, unique: true, required: true },
-  password: { type: String, required: true }
+  password: { type: String, required: true },
+  public_code: { type: String }
 })
 
 schema.loadClass(Farmer)

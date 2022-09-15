@@ -16,7 +16,7 @@ export class CreateFarmUseCase {
       throw new Error('Farm already exists')
     }
 
-    const farmer = await this.farmerRepository.findById(data.owner_id)
+    const farmer = await this.farmerRepository.findByPublicCode(data.owner_id)
 
     if (!farmer) {
       throw new Error('Farmer id not found')

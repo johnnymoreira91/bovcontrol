@@ -12,6 +12,10 @@ export class MongoFarmersRepository implements IFarmersRepository {
     return FarmerSchema.findById(id)
   }
 
+  async findByPublicCode (code: string): Promise<Farmer> {
+    return FarmerSchema.findOne({ public_code: code })
+  }
+
   async delete (id: string): Promise<void> {
     await FarmerSchema.deleteOne({ id })
   }

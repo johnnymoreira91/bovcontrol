@@ -7,7 +7,7 @@ export class FindFarmerUseCase {
   ) {}
 
   async execute (data: IFindFarmerRequestDTO) {
-    const farmer = await this.farmersRespository.findById(data.id)
+    const farmer = await this.farmersRespository.findByPublicCode(data.id)
 
     if (!farmer) {
       throw new Error('Farmer not found')
