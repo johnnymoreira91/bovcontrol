@@ -7,8 +7,7 @@ export class Farmer {
   public password: string
   public public_code: string
 
-  constructor (props: Omit<Farmer, 'id'>, id?: string) {
-    this.public_code = uuidv4()
+  constructor (props: Omit<Farmer, 'id' | 'public_code'>, id?: string) {
     Object.assign(this, props)
   }
 }

@@ -7,7 +7,7 @@
   "markdown.preview.breaks": true,
   "npm.autoDetect": "off",
   "editor.fontLigatures": true,
-  "files.autoSave": "onFocusChange",
+  "files.autoSave": "off",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   }

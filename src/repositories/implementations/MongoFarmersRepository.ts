@@ -17,7 +17,7 @@ export class MongoFarmersRepository implements IFarmersRepository {
   }
 
   async delete (id: string): Promise<void> {
-    await FarmerSchema.deleteOne({ id })
+    await FarmerSchema.deleteOne({ public_code: id })
   }
 
   async findByEmail (email: string): Promise<Farmer> {

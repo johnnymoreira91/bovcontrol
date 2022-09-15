@@ -1,21 +1,22 @@
+/* eslint-disable camelcase */
 import { Request, Response } from 'express'
-import { CreateFarmerUseCase } from './CreateFarmerUseCase'
+import { CreateMilkDayUseCase } from './MilkDayUseCase'
 import { v4 as uuidv4 } from 'uuid'
 
-export class CreateFarmerController {
+export class CreateMilkDayController {
   constructor (
-    private createFarmerUseCase: CreateFarmerUseCase
-  ) { }
+    private milkDayUseCase: CreateMilkDayUseCase
+  ) {}
 
   async handle (req: Request<{}, {}, {
-    name: string, email: string, password: string
+    amount: number, date: Date, farmer_code: string
   }>, res: Response): Promise<Response> {
-    const { name, email, password } = req.body
+    const { amount, date, farmer_code } = req.body
     try {
-      await this.createFarmerUseCase.execute({
-        name,
-        email,
-        password,
+      await this.milkDayUseCase.execute({
+        amount,
+        date: date || new Date(),
+        farmer_code,
         public_code: uuidv4()
       })
 
