@@ -1,12 +1,11 @@
-import { IFarmersRepository } from "../../repositories/IFarmersRepository";
+import { IFarmersRepository } from '../../repositories/IFarmersRepository'
 
 export class ListFarmerUseCase {
-
-  constructor(
+  constructor (
     private farmersRespository: IFarmersRepository
   ) { }
 
-  async execute() {
+  async execute () {
     const farmers = await this.farmersRespository.list()
 
     if (!farmers) {

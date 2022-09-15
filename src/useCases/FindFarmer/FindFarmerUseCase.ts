@@ -1,12 +1,12 @@
-import { IFarmersRepository } from "../../repositories/IFarmersRepository";
-import { IFindFarmerRequestDTO } from "./FindFarmerDTO";
+import { IFarmersRepository } from '../../repositories/IFarmersRepository'
+import { IFindFarmerRequestDTO } from './FindFarmerDTO'
 
 export class FindFarmerUseCase {
-  constructor(
+  constructor (
     private farmersRespository: IFarmersRepository
   ) {}
 
-  async execute(data: IFindFarmerRequestDTO) {
+  async execute (data: IFindFarmerRequestDTO) {
     const farmer = await this.farmersRespository.findById(data.id)
 
     if (!farmer) {

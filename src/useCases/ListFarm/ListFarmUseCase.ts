@@ -1,11 +1,9 @@
-import { IFarmRepository } from "../../repositories/IFarmRepository";
+import { IFarmRepository } from '../../repositories/IFarmRepository'
 
 export class ListFarmUseCase {
-  constructor(
-    private farmRepository: IFarmRepository
-  ) {}
+  constructor (private farmRepository: IFarmRepository) {}
 
-  async execute() {
+  async execute () {
     const farms = await this.farmRepository.list()
 
     if (!farms) {

@@ -1,13 +1,12 @@
-import { Request, Response } from "express";
-import { ListFarmerUseCase } from "./ListFarmerUseCase";
+import { Request, Response } from 'express'
+import { ListFarmerUseCase } from './ListFarmerUseCase'
 
 export class ListFarmerController {
-
-  constructor(
+  constructor (
     private listFarmerUseCase: ListFarmerUseCase
   ) {}
 
-  async handle(_req: Request<{}, {}, {}>, res: Response) {
+  async handle (_req: Request<{}, {}, {}>, res: Response) {
     try {
       const listFarmers = await this.listFarmerUseCase.execute()
 

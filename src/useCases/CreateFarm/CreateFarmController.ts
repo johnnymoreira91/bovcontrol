@@ -1,19 +1,19 @@
-import { Request, Response } from "express";
-import { CreateFarmUseCase } from "./CreateFarmUseCase";
+import { Request, Response } from 'express'
+import { CreateFarmUseCase } from './CreateFarmUseCase'
 
 export class CreateFarmController {
-  constructor(
+  constructor (
     private createFarmUseCase: CreateFarmUseCase
   ) {}
 
-  async handle(req: Request<{}, {}, {
+  async handle (req: Request<{}, {}, {
     name: string, owner_id: string
   }>, res: Response): Promise<Response> {
     const { name, owner_id } = req.body
     try {
       await this.createFarmUseCase.execute({
-        name: name,
-        owner_id: owner_id
+        name,
+        owner_id
       })
 
       return res.status(201).send()

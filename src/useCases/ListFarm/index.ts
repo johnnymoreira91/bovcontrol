@@ -1,6 +1,6 @@
-import { MongoFarmRepository } from "../..//repositories/implementations/MongoFarmRepository";
-import { ListFarmUseCase } from "./ListFarmUseCase";
-import { ListFarmController } from "./ListFarmController";
+import { MongoFarmRepository } from '../..//repositories/implementations/MongoFarmRepository'
+import { ListFarmUseCase } from './ListFarmUseCase'
+import { ListFarmController } from './ListFarmController'
 
 const mongoFarmRepository = new MongoFarmRepository()
 

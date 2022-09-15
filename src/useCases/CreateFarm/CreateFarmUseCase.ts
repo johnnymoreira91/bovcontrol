@@ -1,15 +1,15 @@
-import { IFarmersRepository } from "../../repositories/IFarmersRepository";
-import { Farm } from "../../entities/Farm";
-import { IFarmRepository } from "../../repositories/IFarmRepository";
-import { ICreateFarmRequestDTO } from "./CreateFarmDTO";
+import { IFarmersRepository } from '../../repositories/IFarmersRepository'
+import { Farm } from '../../entities/Farm'
+import { IFarmRepository } from '../../repositories/IFarmRepository'
+import { ICreateFarmRequestDTO } from './CreateFarmDTO'
 
 export class CreateFarmUseCase {
-  constructor(
+  constructor (
     private farmRepository: IFarmRepository,
     private farmerRepository: IFarmersRepository
   ) { }
 
-  async execute(data: ICreateFarmRequestDTO) {
+  async execute (data: ICreateFarmRequestDTO) {
     const farmAlreadyExist = await this.farmRepository.findByName(data.name)
 
     if (farmAlreadyExist) {

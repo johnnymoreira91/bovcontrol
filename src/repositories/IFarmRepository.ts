@@ -1,4 +1,4 @@
-import { Farm } from "../entities/Farm"
+import { Farm } from '../entities/Farm'
 
 export interface IFarmRepository {
     list(): Promise<Farm[]>;

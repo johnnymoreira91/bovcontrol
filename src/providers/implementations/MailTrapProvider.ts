@@ -1,11 +1,11 @@
-import { IMailProvider, IMessage } from "../IMailProvider";
+import { IMailProvider, IMessage } from '../IMailProvider'
 
 export class MailTrapProvider implements IMailProvider {
-  constructor(
+  constructor (
 
   ) {}
-  
-  async sendEmail(message: IMessage): Promise<void> {
-    
+
+  async sendEmail (message: IMessage): Promise<void> {
+
   }
 }

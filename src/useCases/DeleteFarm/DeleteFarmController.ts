@@ -1,15 +1,15 @@
 import { Request, Response } from 'express'
-import { DeleteFarmerUseCase } from './DeleteFarmerUseCase'
+import { DeleteFarmUseCase } from './DeleteFarmUseCase'
 
-export class DeleteFarmerController {
+export class DeleteFarmController {
   constructor (
-    private deleteFarmerUseCase: DeleteFarmerUseCase
+    private deleteFarmUseCase: DeleteFarmUseCase
   ) {}
 
   async handle (req: Request<{id: string}, {}, {}>, res: Response): Promise<Response> {
     const { id } = req.params
     try {
-      await this.deleteFarmerUseCase.execute({
+      await this.deleteFarmUseCase.execute({
         id
       })
 
