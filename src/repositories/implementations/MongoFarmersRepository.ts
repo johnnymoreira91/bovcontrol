@@ -1,21 +1,21 @@
+import { FarmerSchema } from "../../providers/entities/Farmer";
 import { Farmer } from "../../entities/Farmer";
 import { IFarmersRepository } from "../IFarmersRepository";
 
 export class MongoFarmersRepository implements IFarmersRepository {
-  private Farmers: Farmer[] = []
 
   async list(): Promise<Farmer[]> {
-    const farmers = this.Farmers
+    const farmers = await FarmerSchema.find({})
     return farmers
   }
 
   async findByEmail(email: string): Promise<Farmer> {
-    const farmer = this.Farmers.find(farmer => farmer.email === email)
+    const farmer = await FarmerSchema.findOne({ email })
 
     return farmer
   }
 
   async save(farmer: Farmer): Promise<void> {
-    this.Farmers.push(farmer)
+    await FarmerSchema.create(farmer)
   }
 }
