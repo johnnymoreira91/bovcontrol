@@ -1,18 +1,18 @@
 import { IFarmersRepository } from "../../repositories/IFarmersRepository";
-import { IDeleteFarmerRequestDTO } from "./DeleteFarmerDTO";
+import { IFindFarmerRequestDTO } from "./FindFarmerDTO";
 
-export class DeleteFarmerUseCase {
+export class FindFarmerUseCase {
   constructor(
     private farmersRespository: IFarmersRepository
-  ) { }
+  ) {}
 
-  async execute(data: IDeleteFarmerRequestDTO) {
+  async execute(data: IFindFarmerRequestDTO) {
     const farmer = await this.farmersRespository.findById(data.id)
 
     if (!farmer) {
       throw new Error('Farmer not found')
     }
 
-    await this.farmersRespository.delete(farmer.id)
+    return farmer
   }
 }
