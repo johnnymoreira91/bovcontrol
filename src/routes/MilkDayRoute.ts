@@ -1,11 +1,12 @@
 import express from 'express'
+import { listMilkDayController } from '../useCases/ListMilkDay'
 import { createMilkDayController } from '../useCases/CreateMilkDay'
 
 const router = express.Router()
 
-// router.get('/', (req, res) => {
-//   return listFarmController.handle(req, res)
-// })
+router.get('/', (req, res) => {
+  return listMilkDayController.handle(req, res)
+})
 
 // router.get('/:id', (req, res) => {
 //   return findFarmController.handle(req, res)
