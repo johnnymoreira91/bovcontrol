@@ -9,6 +9,14 @@ export class MongoFarmersRepository implements IFarmersRepository {
     return farmers
   }
 
+  async findById(id: string): Promise<Farmer> {
+    return FarmerSchema.findById(id)
+  }
+
+  async delete(id: string): Promise<void> {
+    await FarmerSchema.deleteOne({ id })
+  }
+
   async findByEmail(email: string): Promise<Farmer> {
     const farmer = await FarmerSchema.findOne({ email })
 
