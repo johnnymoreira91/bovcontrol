@@ -1,6 +1,8 @@
+/* eslint-disable camelcase */
 import { MilkDaySchema } from '../../providers/entities/MilkDay'
 import { MilkDay } from '../../entities/MilkDay'
 import { IMilkDayRepository } from '../IMilkDayRepository'
+import { FarmerSchema } from '../../providers/entities/Farmer'
 
 export class MongoMilkDayRepository implements IMilkDayRepository {
   async delete (id: string): Promise<void> {
@@ -9,6 +11,14 @@ export class MongoMilkDayRepository implements IMilkDayRepository {
 
   async list (): Promise<MilkDay[]> {
     return MilkDaySchema.find({})
+  }
+
+  async listById (public_code: string): Promise<MilkDay[]> {
+    const farmer = await FarmerSchema.findOne({ public_code })
+    if (!farmer) {
+      throw new Error('Farmer not found')
+    }
+    return MilkDaySchema.find({ farmer_code: farmer.public_code })
   }
 
   async findById (id: string): Promise<MilkDay> {
