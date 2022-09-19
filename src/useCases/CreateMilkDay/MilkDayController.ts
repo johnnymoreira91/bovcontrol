@@ -9,13 +9,15 @@ export class CreateMilkDayController {
   ) {}
 
   async handle (req: Request<{}, {}, {
-    amount: number, date: Date, farmer_code: string
+    amount: number, day: number, month: number, year: number, farmer_code: string
   }>, res: Response): Promise<Response> {
-    const { amount, date, farmer_code } = req.body
+    const { amount, day, month, year, farmer_code } = req.body
     try {
       await this.milkDayUseCase.execute({
         amount,
-        date: date || new Date(),
+        day,
+        month,
+        year,
         farmer_code,
         public_code: uuidv4()
       })

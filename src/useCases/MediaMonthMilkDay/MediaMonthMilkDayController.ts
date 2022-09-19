@@ -8,13 +8,15 @@ export class MediaMonthMilkDayController {
   ) {}
 
   async handle (req: Request<{}, {}, {
-      farmer_code: string, start_date: Date, days: number
+      farmer_code: string, day: number, month: number, year: number, days: number
   }>, res: Response) {
-    const { farmer_code, start_date, days } = req.body
+    const { farmer_code, day, days, month, year } = req.body
     try {
       const listFarmers = await this.mediaMonthMilkDayUseCase.execute({
         farmer_code,
-        start_date: start_date ?? new Date(),
+        day: day ?? new Date().getDay(),
+        month: month ?? new Date().getMonth(),
+        year: year ?? new Date().getFullYear(),
         days: days ?? 30
       })
 

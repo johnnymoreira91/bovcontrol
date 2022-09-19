@@ -9,8 +9,8 @@ export class MediaMonthMilkDayUseCase {
   ) { }
 
   async execute (data: IMediaMonthMilkDayRequestDTO) {
-    const startsAt = new Date() || new Date(data.start_date)
-    const lastXDays = new Date(new Date().setDate(startsAt.getDate() - data.days ?? 30))
+    // const startsAt = new Date() || new Date(data.start_date)
+    // const lastXDays = new Date(new Date().setDate(startsAt.getDate() - data.days ?? 30))
 
     try {
       const milkByFarmer = await this.milkDayRespository.listById(data.farmer_code)
@@ -24,7 +24,7 @@ export class MediaMonthMilkDayUseCase {
       const mediaXDays = filterByDate.map((item: MilkDay) => {
         return {
           amount: item.amount,
-          day: item.date.toISOString().split('T')[0]
+          day: `${item.year}-${item.month}-${item.day}` // item.date.toISOString().split('T')[0]
         }
       })
 

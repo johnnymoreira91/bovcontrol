@@ -5,7 +5,8 @@ const schema = new mongoose.Schema<Farmer>({
   name: { type: String, required: true },
   email: { type: String, unique: true, required: true },
   password: { type: String, required: true },
-  public_code: { type: String }
+  public_code: { type: String },
+  distance_factory: { type: Number, required: true }
 })
 
 schema.loadClass(Farmer)

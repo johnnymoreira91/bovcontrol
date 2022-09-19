@@ -8,15 +8,21 @@ export class CreateFarmerController {
   ) { }
 
   async handle (req: Request<{}, {}, {
-    name: string, email: string, password: string
+    name: string, email: string, password: string, distance_factory: number
   }>, res: Response): Promise<Response> {
-    const { name, email, password } = req.body
+    const { name, email, password, distance_factory } = req.body
     try {
+      if (!name || !email || !password || !distance_factory) {
+        return res.status(400).json({
+          message: 'Params missing'
+        })
+      }
       await this.createFarmerUseCase.execute({
         name,
         email,
         password,
-        public_code: uuidv4()
+        public_code: uuidv4(),
+        distance_factory
       })
 
       return res.status(201).send()
