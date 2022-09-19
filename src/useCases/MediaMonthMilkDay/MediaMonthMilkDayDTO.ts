@@ -3,5 +3,4 @@ export interface IMediaMonthMilkDayRequestDTO {
     day: number
     month: number
     year: number
-    days: number
 }

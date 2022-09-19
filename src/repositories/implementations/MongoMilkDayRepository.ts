@@ -21,6 +21,13 @@ export class MongoMilkDayRepository implements IMilkDayRepository {
     return MilkDaySchema.find({ farmer_code: farmer.public_code })
   }
 
+  async filterByMonthAndFarmer (month: number, farmer_code: string): Promise<MilkDay[]> {
+    return MilkDaySchema.find({
+      month,
+      farmer_code
+    }).sort({ day: -1 })
+  }
+
   async findById (id: string): Promise<MilkDay> {
     return MilkDaySchema.findOne({ public_code: id })
   }
