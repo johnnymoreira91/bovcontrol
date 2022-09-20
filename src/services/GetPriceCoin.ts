@@ -1,5 +1,6 @@
 /* eslint-disable prefer-promise-reject-errors */
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
+import { Price } from '../entities/Price'
 
 class GetPriceCoin {
   private url = 'https://economia.awesomeapi.com.br/last'
@@ -34,9 +35,9 @@ class GetPriceCoin {
     })
   }
 
-  async getUSDPrice () {
+  async getUSDPrice (): Promise<Price> {
     const data = await this.axiosInstance.get('/USD-BRL')
-    return data.data
+    return data.data.USDBRL
   }
 }
 

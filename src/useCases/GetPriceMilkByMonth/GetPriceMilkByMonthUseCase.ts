@@ -2,11 +2,13 @@ import { IFarmRepository } from '../../repositories/IFarmRepository'
 import { MilkDay } from '../../entities/MilkDay'
 import { IMilkDayRepository } from '../../repositories/IMilkDayRepository'
 import { IGetPriceMilkByMonthRequestDTO } from './GetPriceMilkByMonthDTO'
+import { IPriceRepository } from '../../repositories/IPriceRepository'
 
 class GetPriceMilkByMonthUseCase {
   constructor (
     private milkDayRepository: IMilkDayRepository,
-    private farmRepository: IFarmRepository
+    private farmRepository: IFarmRepository,
+    private priceRepository: IPriceRepository
   ) {}
 
   async execute (data: IGetPriceMilkByMonthRequestDTO) {
@@ -36,9 +38,10 @@ class GetPriceMilkByMonthUseCase {
       bonus = 0.01
     }
 
-    const price = (totalMilk * basePrice) - (kmPrice * farmDistance) + (bonus * totalMilk)
-    const priceLiter = price / totalMilk
-    const priceLiterUsd = priceLiter / 5
+    const usdValue = await this.priceRepository.getUSDPrice()
+
+    const priceLiter = ((totalMilk * basePrice) - (kmPrice * farmDistance) + (bonus * totalMilk)) / totalMilk
+    const priceLiterUsd = priceLiter / parseFloat(usdValue.bid)
     return {
       price_BRL: priceLiter.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }),
       price_USD: priceLiterUsd.toLocaleString('en-us', { style: 'currency', currency: 'USD' })
