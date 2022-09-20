@@ -5,6 +5,7 @@ export interface IMilkDayRepository {
     listById(id: number): Promise<MilkDay[]>;
     findByPublicCode(public_code: string): Promise<MilkDay>;
     filterByMonthAndFarmer(month: number, farmer_code: string): Promise<MilkDay[]>;
+    filterByYearAndFarmer(year: number, farmer_code: string): Promise<MilkDay[]>;
     delete(id: string): Promise<void>;
     save(milkDay: MilkDay): Promise<void>;
 }

@@ -23,6 +23,13 @@ export class MongoMilkDayRepository implements IMilkDayRepository {
     }).sort({ day: -1 })
   }
 
+  async filterByYearAndFarmer (year: number, farmer_code: string): Promise<MilkDay[]> {
+    return MilkDaySchema.find({
+      year,
+      farmer_code
+    }).sort({ day: -1 })
+  }
+
   async findByPublicCode (public_code: string): Promise<MilkDay> {
     return MilkDaySchema.findOne({ public_code })
   }

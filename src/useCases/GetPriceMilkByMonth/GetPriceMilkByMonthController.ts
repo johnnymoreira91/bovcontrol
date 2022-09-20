@@ -6,14 +6,12 @@ class GetPriceMilkByMonthController {
     private getPriceMilkByMonthUseCase: GetPriceMilkByMonthUseCase
   ) {}
 
-  async handle (req: Request<{}, {}, {
-    farmer_code: string, month: number
-  }>, res: Response): Promise<Response> {
-    const { farmer_code, month } = req.body
+  async handle (req: Request<{ farmer_code: string, month: string}, {}, {}>, res: Response): Promise<Response> {
+    const { farmer_code, month } = req.params
     try {
       const data = await this.getPriceMilkByMonthUseCase.execute({
         farmer_code,
-        month
+        month: parseInt(month, 10)
       })
 
       return res.status(200).json(data)

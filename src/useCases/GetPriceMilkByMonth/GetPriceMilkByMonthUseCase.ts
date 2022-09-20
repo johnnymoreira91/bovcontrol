@@ -12,14 +12,14 @@ class GetPriceMilkByMonthUseCase {
   ) {}
 
   async execute (data: IGetPriceMilkByMonthRequestDTO) {
-    const milkByFarmer = await this.milkDayRepository.filterByMonthAndFarmer(data.month, data.farmer_code)
+    const filterMilkByFarmerAndMonth = await this.milkDayRepository.filterByMonthAndFarmer(data.month, data.farmer_code)
     const farmDistance = await this.farmRepository.getFarmDistance(data.farmer_code)
 
-    if (!milkByFarmer) {
-      throw new Error('Farmer not found')
+    if (filterMilkByFarmerAndMonth.length === 0) {
+      throw new Error('Farmer/month not found')
     }
 
-    const totalMilk = milkByFarmer.map((item: MilkDay) => {
+    const totalMilk = filterMilkByFarmerAndMonth.map((item: MilkDay) => {
       return { amount: item.amount }
     }).reduce((pv, cr) => pv + cr.amount, 0)
 
@@ -43,8 +43,8 @@ class GetPriceMilkByMonthUseCase {
     const priceLiter = ((totalMilk * basePrice) - (kmPrice * farmDistance) + (bonus * totalMilk)) / totalMilk
     const priceLiterUsd = priceLiter / parseFloat(usdValue.bid)
     return {
-      price_BRL: priceLiter.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }),
-      price_USD: priceLiterUsd.toLocaleString('en-us', { style: 'currency', currency: 'USD' })
+      price_BRL: priceLiter ? priceLiter.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) : 'Not available',
+      price_USD: priceLiterUsd ? priceLiterUsd.toLocaleString('en-us', { style: 'currency', currency: 'USD' }) : 'Not available'
     }
   }
 }
