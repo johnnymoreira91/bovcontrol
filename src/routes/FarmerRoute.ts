@@ -18,7 +18,7 @@ router.post('/', (req, res) => {
   return createFarmerController.handle(req, res)
 })
 
-router.delete('/delete/:id', (req, res) => {
+router.delete('/delete/:public_code', (req, res) => {
   return deleteFarmerController.handle(req, res)
 })
 

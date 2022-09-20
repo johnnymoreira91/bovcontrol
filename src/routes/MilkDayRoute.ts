@@ -19,7 +19,7 @@ router.get('/media/:farmer_code/:month/:year', (req, res) => {
   return mediaMonthMilkDayController.handle(req, res)
 })
 
-router.get('/price/month/:farmer_code/:month', (req, res) => {
+router.get('/price/month/:farmer_code/:month/:year', (req, res) => {
   return getPriceMilkMonthController.handle(req, res)
 })
 

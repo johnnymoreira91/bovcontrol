@@ -10,6 +10,7 @@ export class MediaMonthMilkDayUseCase {
   async execute (data: IMediaMonthMilkDayRequestDTO) {
     try {
       const milkByFarmer = await this.milkDayRepository.filterByMonthAndFarmer(data.month, data.farmer_code)
+      console.log(milkByFarmer)
 
       if (!milkByFarmer) {
         throw new Error('Farmer not found')

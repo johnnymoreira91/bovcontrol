@@ -1,6 +1,8 @@
 import { FarmerSchema } from '../../providers/entities/Farmer'
 import { Farmer } from '../../entities/Farmer'
 import { IFarmersRepository } from '../IFarmersRepository'
+import { FarmSchema } from '../../providers/entities/Farm'
+import { MilkDaySchema } from '../../providers/entities/MilkDay'
 
 export class MongoFarmersRepository implements IFarmersRepository {
   async list (): Promise<Farmer[]> {
@@ -16,8 +18,10 @@ export class MongoFarmersRepository implements IFarmersRepository {
     return FarmerSchema.findOne({ public_code: code })
   }
 
-  async delete (id: string): Promise<void> {
-    await FarmerSchema.deleteOne({ public_code: id })
+  async delete (code: string): Promise<void> {
+    await FarmerSchema.deleteOne({ public_code: code })
+    await FarmSchema.deleteOne({ owner_id: code })
+    await MilkDaySchema.deleteMany({ farmer_code: code })
   }
 
   async findByEmail (email: string): Promise<Farmer> {

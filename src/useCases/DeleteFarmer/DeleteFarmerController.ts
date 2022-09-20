@@ -6,11 +6,11 @@ export class DeleteFarmerController {
     private deleteFarmerUseCase: DeleteFarmerUseCase
   ) {}
 
-  async handle (req: Request<{id: string}, {}, {}>, res: Response): Promise<Response> {
-    const { id } = req.params
+  async handle (req: Request<{public_code: string}, {}, {}>, res: Response): Promise<Response> {
+    const { public_code } = req.params
     try {
       await this.deleteFarmerUseCase.execute({
-        id
+        public_code
       })
 
       return res.status(202).send()

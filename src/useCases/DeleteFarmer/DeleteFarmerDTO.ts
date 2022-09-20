@@ -1,3 +1,3 @@
 export interface IDeleteFarmerRequestDTO {
-    id: string
+    public_code: string
 }

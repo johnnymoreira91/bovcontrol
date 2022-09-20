@@ -7,12 +7,12 @@ export class DeleteFarmerUseCase {
   ) { }
 
   async execute (data: IDeleteFarmerRequestDTO) {
-    const farmer = await this.farmersRespository.findById(data.id)
+    const farmer = await this.farmersRespository.findByPublicCode(data.public_code)
 
     if (!farmer) {
       throw new Error('Farmer not found')
     }
 
-    await this.farmersRespository.delete(farmer.id)
+    await this.farmersRespository.delete(farmer.public_code)
   }
 }

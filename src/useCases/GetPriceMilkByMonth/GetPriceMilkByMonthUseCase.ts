@@ -13,11 +13,11 @@ class GetPriceMilkByMonthUseCase {
 
   async execute (data: IGetPriceMilkByMonthRequestDTO) {
     const filterMilkByFarmerAndMonth = await this.milkDayRepository.filterByMonthAndFarmer(data.month, data.farmer_code)
-    const farmDistance = await this.farmRepository.getFarmDistance(data.farmer_code)
-
     if (filterMilkByFarmerAndMonth.length === 0) {
       throw new Error('Farmer/month not found')
     }
+
+    const farmDistance = await this.farmRepository.getFarmDistance(data.farmer_code)
 
     const totalMilk = filterMilkByFarmerAndMonth.map((item: MilkDay) => {
       return { amount: item.amount }
