@@ -1,4 +1,5 @@
 export interface ICreateFarmRequestDTO {
-    name: string;
-    owner_id: string;
+    name: string
+    owner_id: string
+    distance_factory:number
 }

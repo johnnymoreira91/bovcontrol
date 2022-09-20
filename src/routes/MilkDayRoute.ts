@@ -2,6 +2,7 @@ import express from 'express'
 import { listMilkDayController } from '../useCases/ListMilkDay'
 import { createMilkDayController } from '../useCases/CreateMilkDay'
 import { mediaMonthMilkDayController } from '../useCases/MediaMonthMilkDay'
+import { getPriceMilkMonthController } from '../useCases/GetPriceMilkByMonth'
 
 const router = express.Router()
 
@@ -15,6 +16,10 @@ router.get('/', (req, res) => {
 
 router.get('/media', (req, res) => {
   return mediaMonthMilkDayController.handle(req, res)
+})
+
+router.get('/price/month', (req, res) => {
+  return getPriceMilkMonthController.handle(req, res)
 })
 
 router.post('/', (req, res) => {

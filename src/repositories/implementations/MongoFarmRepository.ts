@@ -19,6 +19,15 @@ export class MongoFarmRepository implements IFarmRepository {
     return FarmSchema.findOne({ name })
   }
 
+  async getFarmDistance (farmer_code: string): Promise<number> {
+    const farm = await FarmSchema.findOne({ owner_id: farmer_code })
+    return farm.distance_factory
+  }
+
+  async findByOwnerId (owner_id: string): Promise<Farm> {
+    return FarmSchema.findOne({ owner_id })
+  }
+
   async save (farm: Farm): Promise<void> {
     await FarmSchema.create(farm)
   }

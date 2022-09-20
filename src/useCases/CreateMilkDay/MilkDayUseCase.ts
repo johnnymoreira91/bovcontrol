@@ -11,7 +11,7 @@ export class CreateMilkDayUseCase {
   ) { }
 
   async execute (data: ICreateMilkDayRequestDTO) {
-    const MilkDayAlreadyExist = await this.milkDayRespository.findById(data.public_code)
+    const MilkDayAlreadyExist = await this.milkDayRespository.findByPublicCode(data.public_code)
 
     if (MilkDayAlreadyExist) {
       throw new Error('Milk data already exists')

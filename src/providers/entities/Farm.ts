@@ -3,7 +3,8 @@ import { mongoose } from '../implementations/MongoProvider'
 
 const schema = new mongoose.Schema<Farm>({
   name: { type: String, required: true },
-  owner_id: { type: String, required: true }
+  owner_id: { type: String, required: true },
+  distance_factory: { type: Number, required: true }
 })
 
 schema.loadClass(Farm)

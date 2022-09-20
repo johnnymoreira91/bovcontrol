@@ -8,13 +8,14 @@ export class CreateFarmController {
   ) {}
 
   async handle (req: Request<{}, {}, {
-    name: string, owner_id: string
+    name: string, owner_id: string, distance_factory: number
   }>, res: Response): Promise<Response> {
-    const { name, owner_id } = req.body
+    const { name, owner_id, distance_factory } = req.body
     try {
       await this.createFarmUseCase.execute({
         name,
-        owner_id
+        owner_id,
+        distance_factory
       })
 
       return res.status(201).send()

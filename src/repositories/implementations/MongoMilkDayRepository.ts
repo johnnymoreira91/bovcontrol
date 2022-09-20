@@ -2,7 +2,6 @@
 import { MilkDaySchema } from '../../providers/entities/MilkDay'
 import { MilkDay } from '../../entities/MilkDay'
 import { IMilkDayRepository } from '../IMilkDayRepository'
-import { FarmerSchema } from '../../providers/entities/Farmer'
 
 export class MongoMilkDayRepository implements IMilkDayRepository {
   async delete (id: string): Promise<void> {
@@ -13,12 +12,8 @@ export class MongoMilkDayRepository implements IMilkDayRepository {
     return MilkDaySchema.find({})
   }
 
-  async listById (public_code: string): Promise<MilkDay[]> {
-    const farmer = await FarmerSchema.findOne({ public_code })
-    if (!farmer) {
-      throw new Error('Farmer not found')
-    }
-    return MilkDaySchema.find({ farmer_code: farmer.public_code })
+  async listById (id: number): Promise<MilkDay[]> {
+    return MilkDaySchema.findOne({ id })
   }
 
   async filterByMonthAndFarmer (month: number, farmer_code: string): Promise<MilkDay[]> {
@@ -28,8 +23,8 @@ export class MongoMilkDayRepository implements IMilkDayRepository {
     }).sort({ day: -1 })
   }
 
-  async findById (id: string): Promise<MilkDay> {
-    return MilkDaySchema.findOne({ public_code: id })
+  async findByPublicCode (public_code: string): Promise<MilkDay> {
+    return MilkDaySchema.findOne({ public_code })
   }
 
   async save (milkDay: MilkDay): Promise<void> {

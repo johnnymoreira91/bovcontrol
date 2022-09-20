@@ -11,15 +11,18 @@ export class CreateFarmUseCase {
 
   async execute (data: ICreateFarmRequestDTO) {
     const farmAlreadyExist = await this.farmRepository.findByName(data.name)
-
     if (farmAlreadyExist) {
       throw new Error('Farm already exists')
     }
 
     const farmer = await this.farmerRepository.findByPublicCode(data.owner_id)
-
     if (!farmer) {
       throw new Error('Farmer id not found')
+    }
+
+    const findOwnerId = await this.farmRepository.findByOwnerId(farmer.public_code)
+    if (findOwnerId) {
+      throw new Error('Farmer already has a farm')
     }
 
     const farm = new Farm(data)

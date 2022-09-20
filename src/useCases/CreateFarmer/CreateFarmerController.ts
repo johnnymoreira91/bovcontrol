@@ -8,11 +8,11 @@ export class CreateFarmerController {
   ) { }
 
   async handle (req: Request<{}, {}, {
-    name: string, email: string, password: string, distance_factory: number
+    name: string, email: string, password: string
   }>, res: Response): Promise<Response> {
-    const { name, email, password, distance_factory } = req.body
+    const { name, email, password } = req.body
     try {
-      if (!name || !email || !password || !distance_factory) {
+      if (!name || !email || !password) {
         return res.status(400).json({
           message: 'Params missing'
         })
@@ -21,8 +21,7 @@ export class CreateFarmerController {
         name,
         email,
         password,
-        public_code: uuidv4(),
-        distance_factory
+        public_code: uuidv4()
       })
 
       return res.status(201).send()
