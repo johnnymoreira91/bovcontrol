@@ -12,10 +12,10 @@ export class CreateFarmerUseCase {
     const farmerAlreadyExist = await this.farmersRespository.findByEmail(data.email)
 
     if (farmerAlreadyExist) {
-      throw new Error('Farmer already exists')
+      throw new Error('Farmer already exist')
     }
 
     const farmer = new Farmer(data)
-    await this.farmersRespository.save(farmer)
+    return this.farmersRespository.save(farmer)
   }
 }

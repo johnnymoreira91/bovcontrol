@@ -1,8 +1,8 @@
-import { FarmerSchema } from '../../providers/entities/Farmer'
+import { FarmerSchema } from '../../providers/Schemas/Farmer'
 import { Farmer } from '../../entities/Farmer'
 import { IFarmersRepository } from '../IFarmersRepository'
-import { FarmSchema } from '../../providers/entities/Farm'
-import { MilkDaySchema } from '../../providers/entities/MilkDay'
+import { FarmSchema } from '../../providers/Schemas/Farm'
+import { MilkDaySchema } from '../../providers/Schemas/MilkDay'
 
 export class MongoFarmersRepository implements IFarmersRepository {
   async list (): Promise<Farmer[]> {
@@ -30,7 +30,7 @@ export class MongoFarmersRepository implements IFarmersRepository {
     return farmer
   }
 
-  async save (farmer: Farmer): Promise<void> {
-    await FarmerSchema.create(farmer)
+  async save (farmer: Farmer): Promise<Farmer> {
+    return FarmerSchema.create(farmer)
   }
 }

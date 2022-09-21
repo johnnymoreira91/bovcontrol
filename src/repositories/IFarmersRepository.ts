@@ -6,5 +6,5 @@ export interface IFarmersRepository {
     findByPublicCode(code: string): Promise<Farmer>;
     delete(code: string): Promise<void>;
     findByEmail(email: string): Promise<Farmer>;
-    save(farmer: Farmer): Promise<void>;
+    save(farmer: Farmer): Promise<Farmer>;
 }

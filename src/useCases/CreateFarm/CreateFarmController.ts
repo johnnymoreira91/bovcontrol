@@ -12,13 +12,13 @@ export class CreateFarmController {
   }>, res: Response): Promise<Response> {
     const { name, owner_id, distance_factory } = req.body
     try {
-      await this.createFarmUseCase.execute({
+      const data = await this.createFarmUseCase.execute({
         name,
         owner_id,
         distance_factory
       })
 
-      return res.status(201).send()
+      return res.status(200).json(data)
     } catch (error) {
       return res.status(400).json({
         error: true,

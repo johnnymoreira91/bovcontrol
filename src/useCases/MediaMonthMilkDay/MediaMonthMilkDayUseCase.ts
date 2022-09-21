@@ -10,7 +10,6 @@ export class MediaMonthMilkDayUseCase {
   async execute (data: IMediaMonthMilkDayRequestDTO) {
     try {
       const milkByFarmer = await this.milkDayRepository.filterByMonthAndFarmer(data.month, data.farmer_code)
-      console.log(milkByFarmer)
 
       if (!milkByFarmer) {
         throw new Error('Farmer not found')
@@ -23,11 +22,16 @@ export class MediaMonthMilkDayUseCase {
         }
       })
 
-      const media = mediaXDays.map(x => x.amount).reduce((pv, cr) => (pv + cr) / milkByFarmer.length, 0)
+      const media = mediaXDays.map(x => x.amount)
+      if (media.length === 0) {
+        throw new Error('Month not found')
+      }
+
+      const reduceMilkLiters = media.reduce((pv, cr) => (pv + cr) / milkByFarmer.length)
 
       return {
         month: data.month,
-        media,
+        media: reduceMilkLiters,
         total: mediaXDays
       }
     } catch (error) {

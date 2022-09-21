@@ -17,14 +17,14 @@ export class CreateFarmerController {
           message: 'Params missing'
         })
       }
-      await this.createFarmerUseCase.execute({
+      const farmer = await this.createFarmerUseCase.execute({
         name,
         email,
         password,
         public_code: uuidv4()
       })
 
-      return res.status(201).send()
+      return res.status(200).json(farmer)
     } catch (error) {
       return res.status(400).json({
         error: true,

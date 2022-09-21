@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { MilkDaySchema } from '../../providers/entities/MilkDay'
+import { MilkDaySchema } from '../../providers/Schemas/MilkDay'
 import { MilkDay } from '../../entities/MilkDay'
 import { IMilkDayRepository } from '../IMilkDayRepository'
 

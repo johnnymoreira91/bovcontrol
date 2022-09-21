@@ -1,4 +1,4 @@
-import { FarmSchema } from '../../providers/entities/Farm'
+import { FarmSchema } from '../../providers/Schemas/Farm'
 import { Farm } from '../../entities/Farm'
 import { IFarmRepository } from '../IFarmRepository'
 
@@ -28,7 +28,7 @@ export class MongoFarmRepository implements IFarmRepository {
     return FarmSchema.findOne({ owner_id })
   }
 
-  async save (farm: Farm): Promise<void> {
-    await FarmSchema.create(farm)
+  async save (farm: Farm): Promise<Farm> {
+    return FarmSchema.create(farm)
   }
 }

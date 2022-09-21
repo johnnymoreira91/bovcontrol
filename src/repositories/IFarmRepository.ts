@@ -7,5 +7,5 @@ export interface IFarmRepository {
     findByName(name: string): Promise<Farm>;
     findByOwnerId(owner_id: string): Promise<Farm>;
     getFarmDistance(farmer_code: string): Promise<number>;
-    save(farm: Farm): Promise<void>;
+    save(farm: Farm): Promise<Farm>;
 }

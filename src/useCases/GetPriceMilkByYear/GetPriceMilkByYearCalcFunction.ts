@@ -7,7 +7,6 @@ interface PriceMilkYear {
 }
 
 async function GetPriceMilkByYearCalcFunction (milkData: MilkDay[], distance: number, usdValue: number): Promise<PriceMilkYear[]> {
-  console.log(distance, 'diss')
   const dataPriceMilk: PriceMilkYear[] = []
   const months: number[] = []
   const mapMonths = milkData.map(item => item.month)
